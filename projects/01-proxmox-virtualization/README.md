@@ -47,23 +47,50 @@ Add a screenshot per step in images/ and explain each key command.
 
 *Detailed steps and screenshots will be added after the baseline audit.*
 
-## Real-world case studies
+## Troubleshooting and case studies
 
-- [Remote access using Tailscale and Termius](REMOTE-ACCESS.md): working solution to remote Linux administration, with Proxmox host access pending verification.
-- [VirtualBox to Proxmox migration](MIGRATION.md): migration performed; technical evidence being collected.
-- [SSH connectivity troubleshooting](SSH-TROUBLESHOOTING.md): ongoing investigation, not yet resolved.
+| Problem | Cause | Fix | Status |
+|---|---|---|---|
+| Couldn't reach the Proxmox web UI or VMs from outside the house | A private LAN address only works on the home network | Tailscale overlay network, with Termius for mobile SSH | Solved |
+| Moving existing VMs off a desktop hypervisor | VirtualBox ties VMs to an everyday workstation | Migrated workloads to Proxmox | Done, procedure being documented |
+| SSH from my main Windows PC to a Linux VM fails, while Tailscale SSH works | Under investigation, likely a host firewall rule | [Live troubleshooting log: issue #5](https://github.com/MartinShadow734/HomeLab/issues/5) | Open |
 
-## Troubleshooting
+### Case study: Remote access from outside the home network
 
-| Problem | Cause | Fix |
-|---|---|---|
-| SSH from my main PC to the Linux VM stopped working while SSH over Tailscale still worked | Under investigation. Likely a host firewall rule that limits SSH to the Tailscale interface | To be documented |
+**Problem:** I needed to manage the lab when away from home. Opening the Proxmox web interface by its home LAN address from my laptop outside the house didn't work. I also wanted terminal access from my phone instead of needing to be at the server.
+
+**Why it failed:** a private LAN address is scoped to the local network. It isn't reachable across the internet, so knowing the server's address isn't enough.
+
+**Solution:** I used Tailscale to create an encrypted, WireGuard-based private network between my authorized devices and the lab VMs, and Termius on mobile as the SSH client. This gave me remote administration without opening any ports on the home router.
+
+**Key distinction:** Termius is the SSH client, Tailscale provides network reachability. They solve different problems, and confusing the two is a common remote-access mistake.
+
+**Validated through use:**
+- Remote SSH administration of Linux VMs over Tailscale
+- SSH from mobile using Termius
+- No router port forwarding added
+
+**Still to verify:** whether the Proxmox host itself runs Tailscale, and which path reaches the Proxmox web UI remotely. A controlled off-network test will document which routes succeed.
+
+**Lesson:** separate *application access* (web UI, SSH) from *network reachability* (LAN vs VPN). Tailscale also doesn't replace patching, strong authentication, or host firewalls.
+
+### Case study: Migrating from VirtualBox to Proxmox
+
+**Problem:** my Linux workloads ran in VirtualBox on a general-purpose computer, so they depended on that machine being on and in use.
+
+**Approach:** I installed Proxmox VE on the dedicated M920q and moved existing workloads onto it, including a headless Ubuntu Server VM and a second workload migrated from VirtualBox.
+
+**Why a migration is a better test than a fresh install:** moving a VM exercises virtual disk formats, boot compatibility, and virtual NIC changes, not just a clean setup.
+
+**Still to document:** the exact export and import procedure, source and destination VM settings from the live host, and post-migration checks (boot, network, application, persistence after reboot).
+
+**Lesson:** a migration isn't done just because the disk imports. Boot, network reachability, and application behavior all need to be verified.
 
 ## Validation
 
 - [ ] Baseline audit confirms CPU, memory, storage, and VM resource assignments
 - [ ] All VMs start cleanly after a host reboot
-- [ ] Remote SSH access works over Tailscale
+- [x] Remote SSH access works over Tailscale, including from mobile
 - [ ] Network configuration documented and diagrammed
 
 ## Lessons learned
