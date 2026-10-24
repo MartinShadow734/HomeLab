@@ -1,6 +1,6 @@
 # Case study: Migrating workloads from VirtualBox to Proxmox
 
-**Status:** Migration performed; detailed procedure and verification pending.
+**Status:** Migration performed; detailed procedure and verification pending.  
 **Skills:** Virtualization, VM migration, Linux administration, infrastructure consolidation
 
 ## Problem

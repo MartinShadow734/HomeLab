@@ -1,6 +1,6 @@
 # Case study: Remote Proxmox and Linux administration
 
-**Status:** Remote access solution used successfully; host-side configuration still needs an audit.
+**Status:** Remote access solution used successfully; host-side configuration still needs an audit.  
 **Skills:** Remote administration, Tailscale, SSH, network troubleshooting, access control
 
 ## Problem

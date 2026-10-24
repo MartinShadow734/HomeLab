@@ -1,6 +1,6 @@
 # Case study in progress: SSH connectivity diagnosis
 
-**Status:** Unresolved, root cause not yet verified.
+**Status:** Unresolved, root cause not yet verified.  
 **Skills:** SSH, Linux firewalling, network diagnostics, VPN routing
 
 ## Problem
