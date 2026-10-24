@@ -47,6 +47,12 @@ Add a screenshot per step in images/ and explain each key command.
 
 *Detailed steps and screenshots will be added after the baseline audit.*
 
+## Real-world case studies
+
+- [Remote access using Tailscale and Termius](REMOTE-ACCESS.md): working solution to remote Linux administration, with Proxmox host access pending verification.
+- [VirtualBox to Proxmox migration](MIGRATION.md): migration performed; technical evidence being collected.
+- [SSH connectivity troubleshooting](SSH-TROUBLESHOOTING.md): ongoing investigation, not yet resolved.
+
 ## Troubleshooting
 
 | Problem | Cause | Fix |
