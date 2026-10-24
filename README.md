@@ -54,12 +54,9 @@ See the [hardware inventory](hardware.md) for precise component status.
 
 ## How to review this portfolio
 
-Each project explains **the problem, technical decisions, implementation, troubleshooting, validation, and lessons learned**. Work in progress is labeled clearly. Technical screenshots and diagrams will be added only after review for sensitive information.
-
-[Project documentation template](templates/PROJECT-TEMPLATE.md) · [Public documentation safety checklist](docs/REDACTION-CHECKLIST.md)
+Each project explains **the problem, technical decisions, implementation, troubleshooting, validation, and lessons learned**. Work in progress is labeled clearly.
 
 ## Connect
 
-<!-- Add your LinkedIn URL here, then delete this comment -->
 - LinkedIn: *link coming soon*
 - Other work: [Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)

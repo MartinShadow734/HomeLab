@@ -23,8 +23,6 @@ Server memory and storage will be confirmed in the baseline audit and listed her
 
 ## Rack layout
 
-<!-- After the build, add the photo: ![Rack front](images/rack-front.jpg) -->
-
 *Photo coming after the physical build.*
 
 | U | Device |

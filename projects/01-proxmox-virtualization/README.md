@@ -11,8 +11,6 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 
 ## Architecture
 
-<!-- After the audit, add a diagram: ![Proxmox host and VMs](images/proxmox-overview.png) -->
-
 | Component | Role |
 |---|---|
 | Lenovo ThinkCentre M920q Tiny, i5-8500T | Physical host |
@@ -36,14 +34,6 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 - Set up SSH and Tailscale for remote administration of the VMs
 
 ## Implementation
-
-<!-- Fill in after the baseline audit with real, sanitized output. Suggested steps:
-### Step 1: Install Proxmox VE
-### Step 2: Create the Ubuntu Server VM (CPU, RAM, disk choices and why)
-### Step 3: Migrate the VirtualBox VM (export format, import method)
-### Step 4: Remote access with SSH and Tailscale
-Add a screenshot per step in images/ and explain each key command.
--->
 
 *Detailed steps and screenshots will be added after the baseline audit.*
 
