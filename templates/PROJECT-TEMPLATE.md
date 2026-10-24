@@ -9,9 +9,10 @@ HOW TO USE THIS TEMPLATE
 5. Delete these instruction comments when done.
 -->
 
-**Status:** Planned | In progress | Complete
-**Date completed:** YYYY-MM-DD
-**Skills:** skill one, skill two, skill three
+**Status:** Planned | In progress | Complete  
+**Date completed:** YYYY-MM-DD  
+**Skills:** skill one, skill two, skill three  
+**Relevant to:** target roles, for example NOC Technician, SOC Analyst
 
 ## Objective
 
