@@ -4,7 +4,7 @@
 
 | Item | Model | Role | Status |
 |---|---|---|---|
-| Rack | DeskPi RackMate T1 Plus, 10-inch 8U, 260 mm deep | Houses the lab | In use |
+| Rack | DeskPi RackMate T1 Plus, 10-inch 8U, 260 mm deep | Planned rack enclosure | Owned, assembly not verified |
 | Server | Lenovo ThinkCentre M920q Tiny, Intel i5-8500T (6C/6T), 1x Intel I219-LM 1GbE NIC | Proxmox VE hypervisor | In use |
 | Switch | HPE Aruba Instant On 1830 8G (JL810A), 8x 1GbE, fanless | Lab switching, VLANs, port mirroring | Ordered |
 | Server mount | 10-inch 1U ThinkCentre Tiny rack mount | Mounts the M920q flush in the rack | Ordered |
