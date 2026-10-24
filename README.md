@@ -58,5 +58,5 @@ Each project explains **the problem, technical decisions, implementation, troubl
 
 ## Connect
 
-- LinkedIn: *link coming soon*
+- LinkedIn: [linkedin.com/in/martin-capula](https://www.linkedin.com/in/martin-capula)
 - Other work: [Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)
