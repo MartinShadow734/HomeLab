@@ -3,6 +3,7 @@
 **Status:** In progress
 **Date completed:** Not yet
 **Skills:** Type 1 hypervisor, VM lifecycle management, VM migration, headless Linux administration, remote access
+**Relevant to:** Systems Administrator, NOC Technician, IT Support
 
 ## Objective
 

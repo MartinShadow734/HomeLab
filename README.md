@@ -2,12 +2,14 @@
 
 Hands-on projects in **virtualization, Linux administration, networking, and cybersecurity**, built to demonstrate practical IT and troubleshooting skills.
 
-I'm Martin Capula. I work in IT support and am developing toward NOC and security analyst roles. I hold **CompTIA Security+**, **CompTIA A+**, and **ISC2 CC**.
+I'm Martin Capula. I work in IT support and am developing toward NOC and security analyst roles. I hold **CompTIA Security+**, **CompTIA A+**, and **ISC2 CC**, and I'm studying for the **CCNA**.
 
 ## Start here: Featured project
 
 ### [01 · Proxmox Virtualization and VM Migration](projects/01-proxmox-virtualization/README.md)
 **In progress** | Proxmox VE · Ubuntu Server · SSH · Tailscale · VirtualBox migration
+
+**Relevant to:** Systems Administrator, NOC Technician, IT Support
 
 **Challenge:** Run and manage multiple server workloads on one compact physical computer rather than relying on a desktop hypervisor.
 
@@ -33,14 +35,14 @@ I'm Martin Capula. I work in IT support and am developing toward NOC and securit
 
 These projects are **planned, not completed**. They'll be documented as they are built and tested.
 
-| Project | Goal |
-|---|---|
-| Backup and restore testing | Prove workloads can be recovered |
-| Rack and managed switch build | Document physical installation and switch baseline |
-| VLAN segmentation and OPNsense | Isolate lab networks without changing the household router |
-| Linux hardening | Verify SSH controls, patching, and access restrictions |
-| Monitoring and security operations | Build observability, logging, and detection exercises |
-| Automation with Ansible | Publish sanitized, tested configuration examples |
+| Project | Goal | Relevant to |
+|---|---|---|
+| Backup and restore testing | Prove workloads can be recovered | Sysadmin, Incident Response |
+| Rack and managed switch build | Document physical installation and switch baseline | NOC, Field IT |
+| VLAN segmentation and OPNsense | Isolate lab networks without changing the household router | Network Admin, Security Analyst |
+| Linux hardening | Verify SSH controls, patching, and access restrictions | Sysadmin, Security Analyst |
+| Monitoring and security operations | Build observability, logging, and detection exercises | NOC, SOC Analyst |
+| Automation with Ansible | Publish sanitized, tested configuration examples | Sysadmin, DevOps |
 
 ## Lab hardware
 
@@ -56,6 +58,8 @@ Each project explains **the problem, technical decisions, implementation, troubl
 
 [Project documentation template](templates/PROJECT-TEMPLATE.md) · [Public documentation safety checklist](docs/REDACTION-CHECKLIST.md)
 
-## Other work
+## Connect
 
-[Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)
+<!-- Add your LinkedIn URL here, then delete this comment -->
+- LinkedIn: *link coming soon*
+- Other work: [Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)

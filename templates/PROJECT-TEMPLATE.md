@@ -12,6 +12,7 @@ HOW TO USE THIS TEMPLATE
 **Status:** Planned | In progress | Complete
 **Date completed:** YYYY-MM-DD
 **Skills:** skill one, skill two, skill three
+**Relevant to:** target roles, for example NOC Technician, SOC Analyst
 
 ## Objective
 
