@@ -1,64 +1,61 @@
-# HomeLab
+# HomeLab | Infrastructure & Security Portfolio
 
-Hands-on IT infrastructure, virtualization, networking, and cybersecurity projects built on a compact 10-inch rack with Proxmox and Linux.
+Hands-on projects in **virtualization, Linux administration, networking, and cybersecurity**, built to demonstrate practical IT and troubleshooting skills.
 
-I'm Martin Capula, an IT Support Technician working toward NOC and Security Analyst roles. I hold CompTIA Security+ and ISC2 CC and I'm studying for the CCNA. This lab is where I practice the skills those roles need, and every project here is documented the way I would document work on the job: what I built, why, what broke, how I fixed it, and how I verified it.
+I'm Martin Capula. I work in IT support and am developing toward NOC and security analyst roles. I hold **CompTIA Security+**, **CompTIA A+**, and **ISC2 CC**.
 
-> **Status:** Build in progress. Projects are marked honestly as Complete, In progress, or Planned.
+## Start here: Featured project
 
-## Lab at a glance
+### [01 · Proxmox Virtualization and VM Migration](projects/01-proxmox-virtualization/README.md)
+**In progress** | Proxmox VE · Ubuntu Server · SSH · Tailscale · VirtualBox migration
 
-| Component | Details |
+**Challenge:** Run and manage multiple server workloads on one compact physical computer rather than relying on a desktop hypervisor.
+
+**What I've done:** Installed Proxmox VE on a Lenovo ThinkCentre M920q Tiny, created a headless Ubuntu Server VM, migrated an existing workload from VirtualBox, and configured remote administration.
+
+**What this demonstrates:** Hypervisor administration, VM migration, Linux CLI, remote connectivity, and systematic troubleshooting.
+
+**Evidence still being prepared:** A read-only host baseline, sanitized architecture diagram, screenshots, and documented validation tests.
+
+[Explore the project →](projects/01-proxmox-virtualization/README.md)
+
+## Skills at a glance
+
+| Area | Hands-on work |
 |---|---|
-| Hypervisor | Lenovo ThinkCentre M920q Tiny, Intel i5-8500T (6 cores), running Proxmox VE |
-| Switch | HPE Aruba Instant On 1830 8G, Layer 2 smart-managed (VLANs, port mirroring, LACP, 802.1X) |
-| Rack | DeskPi RackMate T1 Plus, 10-inch 8U, with keystone patch panel |
-| Network | Lab sits behind the household router and stays isolated from it. OPNsense will route and firewall the lab VLANs |
-| Remote access | SSH and Tailscale |
+| Virtualization | Proxmox VE, VM deployment and migration |
+| Linux | Ubuntu Server, headless administration, SSH |
+| Remote access | Tailscale, SSH connectivity troubleshooting |
+| Infrastructure planning | Compact rack, hardware selection, planned network segmentation |
+| Documentation | Architecture decisions, implementation notes, validation plans |
 
-Full parts list and build notes: [hardware.md](hardware.md)
+## What's next
 
-## Architecture
+These projects are **planned, not completed**. They'll be documented as they are built and tested.
 
-<!-- After the audit, add the diagram: ![Lab network diagram](diagrams/network-overview.png) -->
+| Project | Goal |
+|---|---|
+| Backup and restore testing | Prove workloads can be recovered |
+| Rack and managed switch build | Document physical installation and switch baseline |
+| VLAN segmentation and OPNsense | Isolate lab networks without changing the household router |
+| Linux hardening | Verify SSH controls, patching, and access restrictions |
+| Monitoring and security operations | Build observability, logging, and detection exercises |
+| Automation with Ansible | Publish sanitized, tested configuration examples |
 
-*Diagram coming after the baseline audit. Planned design: Proxmox management stays on the home network, and lab VLANs for management, servers, clients, and an isolated attack network sit behind an OPNsense virtual firewall.*
+## Lab hardware
 
-## Projects
+- **Running:** Lenovo ThinkCentre M920q Tiny with Proxmox VE
+- **Owned, installation not verified:** DeskPi RackMate T1 Plus 8U rack
+- **Ordered, not yet deployed:** Aruba Instant On 1830 8G switch and rack accessories
 
-| # | Project | Skills | Status |
-|---|---|---|---|
-| 01 | [Proxmox Virtualization](projects/01-proxmox-virtualization/) | Type 1 hypervisor, VM lifecycle, VM migration, remote administration | In progress |
-| 02 | Backups and Disaster Recovery | Scheduled backups, retention, restore testing, RPO and RTO | Planned |
-| 03 | Physical Build and Switch Hardening | Structured cabling, port mapping, switch first-boot security | Planned |
-| 04 | VLAN Segmentation | 802.1Q, trunk and access ports, subnetting | Planned |
-| 05 | OPNsense Firewall | Stateful firewalling, NAT, inter-VLAN routing, rule design | Planned |
-| 06 | Linux Hardening and SSH Security | Key-based auth, hardware security keys, least privilege, patching | Planned |
-| 07 | Monitoring | Prometheus, Grafana, alerting | Planned |
-| 08 | Active Directory | AD DS, DNS, DHCP, Group Policy | Planned |
-| 09 | SIEM with Wazuh | Log collection, detection rules, alert triage | Planned |
-| 10 | Vulnerability Management | Scanning, CVSS prioritization, remediation | Planned |
-| 11 | IDS and Traffic Analysis | Suricata, Wireshark, port mirroring | Planned |
-| 12 | Incident Response Exercise | NIST IR lifecycle, detection, containment, recovery | Planned |
-| 13 | Automation | Ansible, configuration as code | Planned |
+See the [hardware inventory](hardware.md) for precise component status.
 
-## How each project is documented
+## How to review this portfolio
 
-Every write-up follows the same structure ([template](templates/PROJECT-TEMPLATE.md)):
+Each project explains **the problem, technical decisions, implementation, troubleshooting, validation, and lessons learned**. Work in progress is labeled clearly. Technical screenshots and diagrams will be added only after review for sensitive information.
 
-1. Objective and the problem being solved
-2. Architecture and tools
-3. Implementation steps and the reasoning behind them
-4. Problems encountered and how I troubleshot them
-5. Validation and evidence
-6. Lessons learned and next improvements
+[Project documentation template](templates/PROJECT-TEMPLATE.md) · [Public documentation safety checklist](docs/REDACTION-CHECKLIST.md)
 
-## Security note
+## Other work
 
-This repository is public, so all screenshots, configs, and diagrams are sanitized before publishing. Passwords, keys, public IPs, device identifiers, and location data are never included. See the [redaction checklist](docs/REDACTION-CHECKLIST.md).
-
-## Connect
-
-<!-- Add your LinkedIn URL below, then delete this comment -->
-- LinkedIn: *link coming soon*
-- Other projects: [Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)
+[Healthcare Patient Flow Dashboard](https://github.com/MartinShadow734/healthcare-patient-flow-dashboard)
