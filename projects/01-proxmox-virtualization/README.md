@@ -44,6 +44,7 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 | Couldn't reach the Proxmox web UI or VMs from outside the house | A private LAN address only works on the home network | Tailscale overlay network, with Termius for mobile SSH | Solved |
 | Moving existing VMs off a desktop hypervisor | VirtualBox ties VMs to an everyday workstation | Migrated workloads to Proxmox | Done, procedure being documented |
 | SSH from my main Windows PC to a Linux VM fails, while Tailscale SSH works | Under investigation, likely a host firewall rule | [Live troubleshooting log: issue #5](https://github.com/MartinShadow734/HomeLab/issues/5) | Open |
+| A disclosed VPN SSH advisory (Tailworm) could let a trusted device escalate to root | Affects the built-in Tailscale SSH feature when enabled | Verified the feature was already disabled on all hosts; removed an unused SSH access rule | Mitigated |
 
 ### Case study: Remote access from outside the home network
 
@@ -75,6 +76,26 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 **Still to document:** the exact export and import procedure, source and destination VM settings from the live host, and post-migration checks (boot, network, application, persistence after reboot).
 
 **Lesson:** a migration isn't done just because the disk imports. Boot, network reachability, and application behavior all need to be verified.
+
+### Case study: Responding to a disclosed VPN SSH advisory
+
+**Status:** Exposure assessed and mitigated. No compromise found.
+
+**Trigger:** In October 2026, researchers disclosed "Tailworm," a set of reported flaws in the built-in SSH feature of the mesh VPN I use for remote access. The most serious chain would let an already-trusted device on the mesh escalate to root on other nodes. I treated the report as something to assess against my own setup, not as proof my lab was affected.
+
+**First question: am I even running the affected feature?** The main risk depends on the VPN's built-in SSH server. I checked every Linux host:
+
+```bash
+sudo tailscale debug prefs | grep -i RunSSH
+```
+
+All returned `RunSSH: false`. I use standard OpenSSH over the VPN rather than its built-in SSH feature, so my hosts were not exposed to the main escalation chain.
+
+**What I changed:** Following least privilege, I removed an unused SSH access rule from the VPN's access controls to shrink the attack surface further.
+
+**What I did not assume:** Disabling one feature does not resolve every finding or prove the lab is safe. I noted follow-ups: review the full access policy, enable node-key expiration, and watch for an official fix, since at the time there was no patch or CVE.
+
+**Lesson:** The first step in responding to any advisory is measuring your own exposure. "Am I running the affected feature, in the affected version, in the affected configuration?" turned a scary headline into a five-minute verification. Documenting the check matters as much as the fix.
 
 ## Validation
 
