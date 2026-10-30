@@ -35,7 +35,33 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 
 ## Implementation
 
-*Detailed steps and screenshots will be added after the baseline audit.*
+### Baseline audit (read-only)
+
+Before changing anything on the host, I ran a read-only baseline audit over SSH to document exactly what the system was and confirm it was healthy. Auditing before touching anything is basic operational discipline: you cannot safely change or troubleshoot a system you have not measured.
+
+Using only non-destructive commands, I inventoried:
+
+- **Compute:** CPU model, core and thread count, and hardware virtualization support (confirming the host can run accelerated VMs)
+- **Memory:** total RAM, how much was committed to running workloads, and available headroom
+- **Storage:** disk type and size, the storage layout, and free space
+- **Workloads:** the virtual machines currently running and their resource assignments
+- **Network and access:** host addressing and confirmation that encrypted remote access was working
+
+Every command only read system state; none modified the host. I recorded the results in a private baseline inventory so future changes can be measured against a known-good starting point.
+
+**Key outcome:** the audit surfaced a single point of failure, the host runs on one disk with no redundancy, which set the priority for the next project (backups and a tested restore). A baseline audit is only useful if it changes what you do next; this one did.
+
+### Verifying no unauthorized access
+
+During the audit I treated an earlier concern, unexpected terminal output during a remote session, as a security question rather than assuming it was harmless. I reviewed:
+
+- Current and recent login sessions and their source addresses
+- Failed and invalid login attempts
+- The accounts and keys authorized to reach the host
+
+All access traced back to my own devices and known networks: no logins from unfamiliar addresses, and no unexpected authorized keys. The "unexpected output" turned out to be a benign terminal display artifact, confirmed by the fact that it tracked my own input rather than a remote actor.
+
+**Lesson:** the first step in responding to anything suspicious is measuring your own exposure from the logs, not guessing. A scary-looking symptom with a clean audit trail is a very different situation from one without, and documenting the check matters as much as the result.
 
 ## Troubleshooting and case studies
 
@@ -44,7 +70,7 @@ Turn a used mini PC into a dedicated virtualization host so I can run servers, f
 | Couldn't reach the Proxmox web UI or VMs from outside the house | A private LAN address only works on the home network | Tailscale overlay network, with Termius for mobile SSH | Solved |
 | Moving existing VMs off a desktop hypervisor | VirtualBox ties VMs to an everyday workstation | Migrated workloads to Proxmox | Done, procedure being documented |
 | SSH from my main Windows PC to a Linux VM fails, while Tailscale SSH works | Under investigation, likely a host firewall rule | [Live troubleshooting log: issue #5](https://github.com/MartinShadow734/HomeLab/issues/5) | Open |
-| A disclosed VPN SSH advisory (Tailworm) could let a trusted device escalate to root | Affects the built-in Tailscale SSH feature when enabled | Verified the feature was already disabled on all hosts; removed an unused SSH access rule | Mitigated |
+| A disclosed VPN SSH advisory could let an already-authorized device exceed its intended privileges | Affects the built-in Tailscale SSH feature when enabled; vendor confirmed the issues are post-authentication | Verified the feature was already disabled on all hosts; removed an unused SSH access rule | Mitigated |
 
 ### Case study: Remote access from outside the home network
 
@@ -91,6 +117,8 @@ sudo tailscale debug prefs | grep -i RunSSH
 
 All returned `RunSSH: false`. I use standard OpenSSH over the VPN rather than its built-in SSH feature, so my hosts were not exposed to the main escalation chain.
 
+**Separating researcher claims from vendor-confirmed scope:** The initial writeup framed this as a root-escalation worm. The vendor's own interim statement was more measured: the confirmed issues are post-authentication, affecting how Unix privileges and SSH forwarding are handled after a device is already authorized, not an unauthenticated attacker reaching arbitrary machines. The vendor did not recommend disabling the feature, and its strongest interim mitigation (disabling SSH forwarding) only applies to hosts actually running the built-in SSH server, which mine were not. A full advisory with affected versions and patches was still pending. Reading the vendor assessment alongside the researcher report, instead of acting on the headline alone, is part of responding to any disclosure.
+
 **What I changed:** Following least privilege, I removed an unused SSH access rule from the VPN's access controls to shrink the attack surface further.
 
 **What I did not assume:** Disabling one feature does not resolve every finding or prove the lab is safe. I noted follow-ups: review the full access policy, enable node-key expiration, and watch for an official fix, since at the time there was no patch or CVE.
@@ -99,7 +127,7 @@ All returned `RunSSH: false`. I use standard OpenSSH over the VPN rather than it
 
 ## Validation
 
-- [ ] Baseline audit confirms CPU, memory, storage, and VM resource assignments
+- [x] Baseline audit confirms CPU, memory, storage, and VM resource assignments
 - [ ] All VMs start cleanly after a host reboot
 - [x] Remote SSH access works over Tailscale, including from mobile
 - [ ] Network configuration documented and diagrammed

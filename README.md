@@ -21,6 +21,12 @@ I'm Martin Capula. I work in IT support and am developing toward NOC and securit
 
 [Explore the project →](projects/01-proxmox-virtualization/README.md)
 
+### [02 · Linux Hardening and Security Auditing](projects/02-linux-hardening/README.md)
+
+Hardened two Linux systems with a repeatable measure-fix-verify process using Lynis, fail2ban, and rootkit detection, raising each system's hardening score and documenting the method and lessons learned. **Relevant to:** Security Analyst, NOC, Sysadmin.
+
+[Explore the project →](projects/02-linux-hardening/README.md)
+
 ## Skills at a glance
 
 | Area | Hands-on work |
@@ -40,7 +46,6 @@ These projects are **planned, not completed**. They'll be documented as they are
 | Backup and restore testing | Prove workloads can be recovered | Sysadmin, Incident Response |
 | Rack and managed switch build | Document physical installation and switch baseline | NOC, Field IT |
 | VLAN segmentation and OPNsense | Isolate lab networks without changing the household router | Network Admin, Security Analyst |
-| Linux hardening | Verify SSH controls, patching, and access restrictions | Sysadmin, Security Analyst |
 | Monitoring and security operations | Build observability, logging, and detection exercises | NOC, SOC Analyst |
 | Automation with Ansible | Publish sanitized, tested configuration examples | Sysadmin, DevOps |
 

@@ -1,0 +1,3 @@
+# Known-safe strings that look like findings but are not
+# jail.local is a fail2ban config filename, not a private hostname
+jail.local
