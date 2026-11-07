@@ -29,7 +29,7 @@ Hardened two Linux systems with a repeatable measure-fix-verify process using Ly
 
 ### [03 · Infrastructure Monitoring with Prometheus and Grafana](projects/03-monitoring/README.md)
 
-**Complete** | Built an isolated, code-provisioned observability stack (node_exporter, Prometheus, Grafana) on Proxmox, with a live host dashboard for CPU, memory, disk, and network that survives reboots. **Relevant to:** NOC Technician, SOC Analyst, SRE.
+**Operational; alerting and hardening pending** | Built an isolated, code-provisioned observability stack (node_exporter, Prometheus, Grafana) on Proxmox, with a live host dashboard for CPU, memory, disk, and network that survives reboots. **Relevant to:** NOC Technician, SOC Analyst, SRE.
 
 [Explore the project →](projects/03-monitoring/README.md)
 
@@ -58,9 +58,12 @@ These projects are **planned, not completed**. They'll be documented as they are
 
 ## Lab hardware
 
-- **Running:** Lenovo ThinkCentre M920q Tiny with Proxmox VE
-- **Owned, installation not verified:** DeskPi RackMate T1 Plus 8U rack
-- **Ordered, not yet deployed:** Aruba Instant On 1830 8G switch and rack accessories
+- **Node 1, running:** Lenovo ThinkCentre M920q Tiny, i5-8500T, **32GB RAM**, 256GB NVMe, Proxmox VE
+- **Node 2, purchased; installation not yet verified:** Lenovo ThinkCentre M920q Tiny, i5-8500T, **16GB RAM planned for installation**, spare SSD planned; cluster not yet configured
+- **Firewall, purchased; deployment not yet verified:** Lanner NCA-1515, Atom C3758, 16GB ECC RAM, 128GB SSD; dedicated OPNsense firewall planned behind the household router
+- **Rack, owned; assembly not verified:** DeskPi RackMate T1 Plus, 10-inch 8U
+- **Switch, ordered; configuration not verified:** Aruba Instant On 1830 8G, plus rack and cabling accessories
+- **Recovery:** separate backup disk and successful restore test still needed
 
 See the [hardware inventory](hardware.md) for precise component status.
 
