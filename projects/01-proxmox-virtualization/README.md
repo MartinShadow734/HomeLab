@@ -7,9 +7,11 @@
 
 ## Objective
 
-Turn a used mini PC into a dedicated virtualization host so I can run servers, firewalls, and security tools as isolated virtual machines. In real IT environments almost every server is virtual, so knowing how to build, manage, and recover VMs on a hypervisor is a core skill for sysadmin, NOC, and security roles.
+Turn a used mini PC into a dedicated virtualization host for server and security workloads. A second matching node is planned for expansion; the firewall is now planned as a separate physical appliance. In real IT environments almost every server is virtual, so knowing how to build, manage, and recover VMs on a hypervisor is a core skill for sysadmin, NOC, and security roles.
 
 ## Architecture
+
+Node 1 is confirmed at **32GB RAM and 256GB NVMe**. Node 2 is purchased, with **16GB RAM planned**; cluster setup has not been verified. The dedicated Lanner firewall is separate from Proxmox.
 
 | Component | Role |
 |---|---|
@@ -138,9 +140,9 @@ All returned `RunSSH: false`. I use standard OpenSSH over the VPN rather than it
 
 ## Next improvements
 
-- Complete a read-only baseline audit and publish sanitized results
-- Set up scheduled backups to a separate disk and test a full restore (Project 02)
-- Make the network bridge VLAN-aware for lab segmentation (Project 04)
+- Publish the sanitized results of the completed baseline audit
+- Set up scheduled backups to a separate disk and test a full restore (backup project)
+- Plan VLAN-aware bridges and access with the dedicated OPNsense firewall (network segmentation project)
 
 ## Related job skills
 
