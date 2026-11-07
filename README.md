@@ -27,6 +27,12 @@ Hardened two Linux systems with a repeatable measure-fix-verify process using Ly
 
 [Explore the project →](projects/02-linux-hardening/README.md)
 
+### [03 · Infrastructure Monitoring with Prometheus and Grafana](projects/03-monitoring/README.md)
+
+**Complete** | Built an isolated, code-provisioned observability stack (node_exporter, Prometheus, Grafana) on Proxmox, with a live host dashboard for CPU, memory, disk, and network that survives reboots. **Relevant to:** NOC Technician, SOC Analyst, SRE.
+
+[Explore the project →](projects/03-monitoring/README.md)
+
 ## Skills at a glance
 
 | Area | Hands-on work |
@@ -35,6 +41,7 @@ Hardened two Linux systems with a repeatable measure-fix-verify process using Ly
 | Linux | Ubuntu Server, headless administration, SSH |
 | Remote access | Tailscale, SSH connectivity troubleshooting |
 | Infrastructure planning | Compact rack, hardware selection, planned network segmentation |
+| Monitoring & observability | Prometheus, Grafana, node_exporter, infrastructure-as-code provisioning |
 | Documentation | Architecture decisions, implementation notes, validation plans |
 
 ## What's next
@@ -46,7 +53,7 @@ These projects are **planned, not completed**. They'll be documented as they are
 | Backup and restore testing | Prove workloads can be recovered | Sysadmin, Incident Response |
 | Rack and managed switch build | Document physical installation and switch baseline | NOC, Field IT |
 | VLAN segmentation and OPNsense | Isolate lab networks without changing the household router | Network Admin, Security Analyst |
-| Monitoring and security operations | Build observability, logging, and detection exercises | NOC, SOC Analyst |
+| Logging and threat detection (SIEM) | Centralize logs and build detection and triage exercises with Wazuh | SOC Analyst, Security |
 | Automation with Ansible | Publish sanitized, tested configuration examples | Sysadmin, DevOps |
 
 ## Lab hardware
