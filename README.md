@@ -29,7 +29,7 @@ Hardened two Linux systems with a repeatable measure-fix-verify process using Ly
 
 ### [03 · Infrastructure Monitoring with Prometheus and Grafana](projects/03-monitoring/README.md)
 
-**Complete** | Built an isolated, code-provisioned observability stack (node_exporter, Prometheus, Grafana) on Proxmox, with a live host dashboard for CPU, memory, disk, and network that survives reboots. **Relevant to:** NOC Technician, SOC Analyst, SRE.
+**Operational; alerting and hardening pending** | Built an isolated, code-provisioned observability stack (node_exporter, Prometheus, Grafana) on Proxmox, with a live host dashboard for CPU, memory, disk, and network that survives reboots. **Relevant to:** NOC Technician, SOC Analyst, SRE.
 
 [Explore the project →](projects/03-monitoring/README.md)
 
@@ -58,11 +58,13 @@ These projects are **planned, not completed**. They'll be documented as they are
 
 ## Lab hardware
 
-- **Running:** Lenovo ThinkCentre M920q Tiny with Proxmox VE
-- **Owned, installation not verified:** DeskPi RackMate T1 Plus 8U rack
-- **Ordered, not yet deployed:** Aruba Instant On 1830 8G switch and rack accessories
+- **Proxmox Node 1:** Lenovo M920q, i5-8500T, **32GB RAM** (running)
+- **Proxmox Node 2:** Lenovo M920q, i5-8500T, **16GB RAM** (purchased, setup pending)
+- **Firewall:** Lanner NCA-1515, Atom C3758, 16GB ECC, 128GB SSD (purchased)
+- **Switch:** Aruba Instant On 1830 8G (ordered)
+- **Rack:** DeskPi RackMate T1 Plus, 8U (owned)
 
-See the [hardware inventory](hardware.md) for precise component status.
+See [hardware.md](hardware.md) for the appliance inventory.
 
 ## How to review this portfolio
 
