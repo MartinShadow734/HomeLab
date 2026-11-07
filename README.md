@@ -58,14 +58,13 @@ These projects are **planned, not completed**. They'll be documented as they are
 
 ## Lab hardware
 
-- **Node 1, running:** Lenovo ThinkCentre M920q Tiny, i5-8500T, **32GB RAM**, 256GB NVMe, Proxmox VE
-- **Node 2, purchased; installation not yet verified:** Lenovo ThinkCentre M920q Tiny, i5-8500T, **16GB RAM planned for installation**, spare SSD planned; cluster not yet configured
-- **Firewall, purchased; deployment not yet verified:** Lanner NCA-1515, Atom C3758, 16GB ECC RAM, 128GB SSD; dedicated OPNsense firewall planned behind the household router
-- **Rack, owned; assembly not verified:** DeskPi RackMate T1 Plus, 10-inch 8U
-- **Switch, ordered; configuration not verified:** Aruba Instant On 1830 8G, plus rack and cabling accessories
-- **Recovery:** separate backup disk and successful restore test still needed
+- **Proxmox Node 1:** Lenovo M920q, i5-8500T, **32GB RAM** (running)
+- **Proxmox Node 2:** Lenovo M920q, i5-8500T, **16GB RAM** (purchased, setup pending)
+- **Firewall:** Lanner NCA-1515, Atom C3758, 16GB ECC, 128GB SSD (purchased)
+- **Switch:** Aruba Instant On 1830 8G (ordered)
+- **Rack:** DeskPi RackMate T1 Plus, 8U (owned)
 
-See the [hardware inventory](hardware.md) for precise component status.
+See [hardware.md](hardware.md) for the appliance inventory.
 
 ## How to review this portfolio
 
