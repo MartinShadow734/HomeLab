@@ -1,17 +1,20 @@
-# Project 01: Proxmox Virtualization
+# Project 01: Proxmox Virtualization and Two-Node Cluster
 
-**Status:** In progress  
-**Date completed:** Not yet  
-**Skills:** Type 1 hypervisor, VM lifecycle management, VM migration, headless Linux administration, remote access  
+**Status:** Operational; backup restore testing pending  
+**Skills:** Type 1 hypervisor, VM lifecycle management, VM migration, cluster quorum, incident diagnosis, headless Linux administration, remote access  
 **Relevant to:** Systems Administrator, NOC Technician, IT Support
 
 ## Objective
 
-Turn a used mini PC into a dedicated virtualization host for server and security workloads. A second matching node is planned for expansion; the firewall is now planned as a separate physical appliance. In real IT environments almost every server is virtual, so knowing how to build, manage, and recover VMs on a hypervisor is a core skill for sysadmin, NOC, and security roles.
+Run server and security workloads across a two-node Proxmox cluster built from used Lenovo M920q Tiny mini PCs. The cluster gives workload separation and a path toward tested recovery; the dedicated Lanner firewall is a separate appliance covered in its own project. In real IT environments almost every server is virtual, so knowing how to build, manage, and recover VMs on a hypervisor cluster is a core skill for sysadmin, NOC, and security roles.
 
 ## Architecture
 
-Node 1 is confirmed at **32GB RAM and 256GB NVMe**. Node 2 is purchased, with **16GB RAM planned**; cluster setup has not been verified. The dedicated Lanner firewall is separate from Proxmox.
+Node 1 runs **32GB RAM and 256GB NVMe**. Node 2 runs **16GB RAM**. Both nodes are joined in a Proxmox cluster and participate in corosync quorum. The dedicated Lanner firewall is separate from Proxmox.
+
+### Capacity note
+
+Node RAM is asymmetric by design (32GB and 16GB). Workload placement reflects that: larger VMs are scheduled on Node 1, lightweight services (small LXCs, monitoring agents) on Node 2. A VM whose memory footprint exceeds 16GB cannot live-migrate from Node 1 to Node 2. If Node 1 were lost, Node 2 alone could not run every workload; the cluster is built for flexibility and recovery practice, not high availability.
 
 | Component | Role |
 |---|---|
@@ -34,6 +37,8 @@ Node 1 is confirmed at **32GB RAM and 256GB NVMe**. Node 2 is purchased, with **
 - Built and ran a headless Ubuntu Server VM with no desktop environment
 - Migrated an existing VM from VirtualBox (a Type 2 desktop hypervisor) to Proxmox
 - Set up SSH and Tailscale for remote administration of the VMs
+- Added a second Proxmox node (M920q, i5-8600T, 16GB RAM) and joined it to the first node as a cluster
+- Diagnosed a cluster quorum loss after a rack power outage and restored quorum by reconnecting the second node
 
 ## Implementation
 
@@ -127,22 +132,63 @@ All returned `RunSSH: false`. I use standard OpenSSH over the VPN rather than it
 
 **Lesson:** The first step in responding to any advisory is measuring your own exposure. "Am I running the affected feature, in the affected version, in the affected configuration?" turned a scary headline into a five-minute verification. Documenting the check matters as much as the fix.
 
+### Case study: Cluster quorum loss after a rack power outage
+
+**Status:** Recovered. Workloads verified running.
+
+**Trigger:** The rack lost power. When power came back, only Node 1 was back on the network; Node 2 was still disconnected. Node 1 was reachable, but I could not start any of its VMs.
+
+**First check: what does the cluster actually see?** Instead of restarting services or forcing anything, I ran the read-only status command on Node 1:
+
+```bash
+pvecm status
+```
+
+Output showed 1 of 2 expected votes and `Quorate: No`. That single line explained the whole symptom: in a two-node Proxmox cluster without a tie-breaker, losing one node drops the survivor below quorum, and Proxmox will not start new workloads under a non-quorate cluster. Reachability on its own is not enough. Quorum is what gives the cluster permission to act.
+
+**Recovery plan:** Reconnect Node 2 so both corosync votes return. No config changes to force quorum, because forcing quorum on a split cluster is the common way to create split-brain later.
+
+**Recovery steps:**
+
+1. Reconnected Node 2 to the network on the same segment as Node 1
+2. Re-ran `pvecm status` on both nodes until both showed 2 of 2 votes and `Quorate: Yes`
+3. Checked each VM and LXC with `qm list` and `pct list`
+4. Started the workloads that had not auto-resumed and verified each service was reachable
+
+**What I did not do:** I did not run `pvecm expected 1` or any other command to force quorum with only one node online. Forcing quorum is a last resort; it can create a split-brain when the other node reappears.
+
+**What this did not prove:** This incident proves the cluster can recover from a brief, clean power event when both nodes return. It does not prove:
+
+- Automatic failover of a VM from a dead node (no HA configured)
+- Live migration under load (not tested)
+- Quorum survival with one node permanently offline (needs a QDevice as an external tie-breaker)
+- A restore from backup (planned as a separate tested procedure)
+
+**Lesson:** In a two-node cluster, quorum is the real failure mode, not reachability. Diagnosing from `pvecm status` first, before touching anything, turned a confusing outage into a specific, textbook problem with a textbook fix. Forcing quorum would have "worked" but would have been the wrong tool.
+
 ## Validation
 
 - [x] Baseline audit confirms CPU, memory, storage, and VM resource assignments
+- [x] Both cluster nodes report `Quorate: Yes` with 2 of 2 votes under normal conditions
+- [x] Cluster recovered quorum after a real rack power outage, workloads verified running
 - [ ] All VMs start cleanly after a host reboot
 - [x] Remote SSH access works over Tailscale, including from mobile
+- [ ] Timed backup and restore of at least one VM to a separate VMID
+- [ ] Quorum survival with one node permanently offline (requires an external QDevice tie-breaker)
 - [ ] Network configuration documented and diagrammed
 
 ## Lessons learned
 
 - Running workloads in VMs on a Type 1 hypervisor, instead of directly on the host, keeps the host clean and makes each service easy to rebuild or roll back.
+- In a two-node cluster, quorum is a separate concern from reachability; losing one node blocks workload changes on the survivor until quorum returns or an external tie-breaker is added.
+- Asymmetric node capacity (32GB and 16GB) is a workload-placement decision, not a bug. The cluster is for flexibility and recovery practice, not high availability.
 
 ## Next improvements
 
 - Publish the sanitized results of the completed baseline audit
 - Set up scheduled backups to a separate disk and test a full restore (backup project)
-- Plan VLAN-aware bridges and access with the dedicated OPNsense firewall (network segmentation project)
+- Add a QDevice as an external tie-breaker so the cluster can stay quorate with one node offline
+- Plan VLAN-aware bridges and access on the Aruba managed switch (network segmentation project, under the pfSense firewall)
 
 ## Related job skills
 
