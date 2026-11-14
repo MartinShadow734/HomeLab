@@ -6,18 +6,18 @@ I'm Martin Capula. I work in IT support and am developing toward NOC and securit
 
 ## Start here: Featured project
 
-### [01 · Proxmox Virtualization and VM Migration](projects/01-proxmox-virtualization/README.md)
-**In progress** | Proxmox VE · Ubuntu Server · SSH · Tailscale · VirtualBox migration
+### [01 · Proxmox Virtualization and Two-Node Cluster](projects/01-proxmox-virtualization/README.md)
+**Operational; backup restore testing pending** | Proxmox VE · Two-node cluster · Ubuntu Server · SSH · Tailscale · VirtualBox migration
 
 **Relevant to:** Systems Administrator, NOC Technician, IT Support
 
-**Challenge:** Run and manage multiple server workloads on one compact physical computer rather than relying on a desktop hypervisor.
+**Challenge:** Run and manage multiple server workloads across a compact two-node Proxmox cluster with asymmetric capacity, and diagnose it when it breaks.
 
-**What I've done:** Installed Proxmox VE on a Lenovo ThinkCentre M920q Tiny, created a headless Ubuntu Server VM, migrated an existing workload from VirtualBox, and configured remote administration.
+**What I've done:** Installed Proxmox VE on two Lenovo M920q Tiny nodes, joined them into a cluster, migrated a workload from VirtualBox, configured remote administration, and diagnosed a cluster quorum loss after a rack power outage.
 
-**What this demonstrates:** Hypervisor administration, VM migration, Linux CLI, remote connectivity, and systematic troubleshooting.
+**What this demonstrates:** Hypervisor administration, two-node cluster operation, VM migration, Linux CLI, remote connectivity, and evidence-driven troubleshooting of a real incident.
 
-**Evidence still being prepared:** A read-only host baseline, sanitized architecture diagram, screenshots, and documented validation tests.
+**Evidence still being prepared:** Sanitized architecture diagram, a timed backup-and-restore test, and a dashboard capture of a host-down alert.
 
 [Explore the project →](projects/01-proxmox-virtualization/README.md)
 
@@ -50,19 +50,21 @@ These projects are **planned, not completed**. They'll be documented as they are
 
 | Project | Goal | Relevant to |
 |---|---|---|
-| Backup and restore testing | Prove workloads can be recovered | Sysadmin, Incident Response |
-| Rack and managed switch build | Document physical installation and switch baseline | NOC, Field IT |
-| VLAN segmentation and OPNsense | Isolate lab networks without changing the household router | Network Admin, Security Analyst |
+| Backup and restore testing | Prove workloads can be recovered on a tested procedure, not assumption | Sysadmin, Incident Response |
+| VLAN segmentation on managed switch | Isolate lab networks behind pfSense without changing the household router | Network Admin, Security Analyst |
 | Logging and threat detection (SIEM) | Centralize logs and build detection and triage exercises with Wazuh | SOC Analyst, Security |
+| Monitoring alerts | Add host-down alerting on top of the existing Prometheus / Grafana stack | NOC, SRE |
 | Automation with Ansible | Publish sanitized, tested configuration examples | Sysadmin, DevOps |
 
 ## Lab hardware
 
-- **Proxmox Node 1:** Lenovo M920q, i5-8500T, **32GB RAM** (running)
-- **Proxmox Node 2:** Lenovo M920q, i5-8500T, **16GB RAM** (purchased, setup pending)
-- **Firewall:** Lanner NCA-1515, Atom C3758, 16GB ECC, 128GB SSD (purchased)
-- **Switch:** Aruba Instant On 1830 8G (ordered)
+- **Proxmox Node 1:** Lenovo M920q, i5-8500T, **32GB RAM** (running, cluster primary)
+- **Proxmox Node 2:** Lenovo M920q, i5-8600T, **16GB RAM** (running, joined cluster)
+- **Firewall:** Lanner NCA-1515, Atom C3758, 16GB ECC, 128GB SSD (pfSense CE deployed)
+- **Switch:** Aruba Instant On 1830 8G (deployed, VLAN config pending)
 - **Rack:** DeskPi RackMate T1 Plus, 8U (owned)
+
+Node 1 and Node 2 have asymmetric RAM. Workload placement reflects this.
 
 See [hardware.md](hardware.md) for the appliance inventory.
 
